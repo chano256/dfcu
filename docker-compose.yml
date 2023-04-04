@@ -27,8 +27,8 @@ services:
     tty: true
 
     ports:
-      - "8100:80"
-      - "8143:443"
+      - "8080:80"
+      - "8443:443"
 
     volumes:
       - ./:/var/www
