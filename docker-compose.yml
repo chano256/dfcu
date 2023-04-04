@@ -48,10 +48,9 @@ services:
       - "3306:3306"
 
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE:?error} # must set or error
+      MYSQL_DATABASE: "${DB_DATABASE:?error}" # must set or error
       MYSQL_USER: "${DB_USERNAME:?error}" # must set or error
-      MYSQL_PASSWORD: "${DB_PASSWORD:?error}" # must set or error
-      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?error} # must set or error
+      MYSQL_ROOT_PASSWORD: "${DB_PASSWORD:?error}" # must set or error
 
     volumes:
       - mariadbdata:/var/lib/mysql
