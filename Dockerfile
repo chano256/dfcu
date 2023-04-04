@@ -18,7 +18,8 @@ RUN apt-get update && apt-get install -y \
     nano \
     unzip \
     git \
-    curl
+    curl \
+    apt-get install -y iputils-ping
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
