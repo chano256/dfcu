@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
 
-    container_name: dfcu_app
+    container_name: backend
     restart: unless-stopped
     tty: true
     working_dir: /var/www
@@ -22,7 +22,7 @@ services:
   # NGINX - Service
   webserver:
     image: nginx:alpine
-    container_name: dfcu_webserver
+    container_name: webserver
     restart: unless-stopped
     tty: true
 
@@ -40,7 +40,7 @@ services:
   # MariaDB - Service
   db:
     image: mariadb:10.5.6
-    container_name: dfcu_db
+    container_name: db
     restart: unless-stopped
     tty: true
 
@@ -48,8 +48,8 @@ services:
       - "3306:3306"
 
     environment:
-      MYSQL_DATABASE: dfcu
-      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: ${DB_NAME:?error}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?error}
 
     volumes:
       - mariadbdata:/var/lib/mysql
