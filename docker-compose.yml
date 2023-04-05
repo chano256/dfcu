@@ -20,6 +20,7 @@ services:
       - app-network
 
     # execute seamless commands for project to start
+    # cp .env.example file to .env before generating APP_KEY
     # command: composer install && php artisan key:generate && php artisan db:seed && php artisan migrate
 
   # NGINX - Service
