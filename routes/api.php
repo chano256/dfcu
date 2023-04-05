@@ -18,7 +18,7 @@ Route::group(
     ['prefix' => 'accounts'],
     function () {
         Route::get('/{number}', [AccountController::class, 'show'])
-            ->where('number', '^\d{10}$') // only accepts 10 digits
+            // ->where('number', '^\d{10}$') // only accepts 10 digits
             ->name('accounts.show');
     }
 );
