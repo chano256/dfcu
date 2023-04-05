@@ -19,6 +19,7 @@ class CreateCustomersTable extends Migration
             $table->string('last_name', 30);
             $table->string("fullname", 60)->virtualAs("(concat(first_name,' ',last_name))");
             $table->string('number', 10)->unique();
+            $table->string('account_number', 10)->unique();
             $table->string('phone', 20)->unique();
             $table->boolean('status')->default(0);
             $table->timestamps();

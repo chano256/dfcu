@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Loan extends Model
 {
     use HasFactory;
 
     /**
-     * Get loans for a customer
+     * Get Customer for loan
      */
-    public function loans()
+    public function customer()
     {
-        return $this->hasMany(Loan::class); // customer should not have loan id column
+        return $this->hasOne(Customer::class);
     }
 }
