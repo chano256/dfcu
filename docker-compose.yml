@@ -1,74 +1,85 @@
-version: '3.7'
+version: "3.7"
 
 services:
-  # PHP-FPM - Service
-  app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # PHP-FPM - Service
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
 
-    container_name: ${APP_NAME}_backend
-    restart: unless-stopped
-    tty: true
-    working_dir: /var/www
+        container_name: ${APP_NAME}_backend
+        restart: unless-stopped
+        tty: true
+        working_dir: /var/www
 
-    volumes:
-      - ./:/var/www
-      - ./docker-files/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        volumes:
+            - ./:/var/www
+            - ./docker-files/php/local.ini:/usr/local/etc/php/conf.d/local.ini
 
-    networks:
-      - app-network
+        networks:
+            - app-network
 
-    # execute seamless commands for project to start
-    # cp .env.example file to .env before generating APP_KEY
-    # command: composer install && php artisan key:generate && php artisan db:seed && php artisan migrate
+        # execute seamless commands for project to start
+        # cp .env.example file to .env before generating APP_KEY
+        # command: composer install && php artisan key:generate && php artisan db:seed && php artisan migrate
 
-  # NGINX - Service
-  webserver:
-    image: nginx:alpine
-    container_name: ${APP_NAME}_webserver
-    restart: unless-stopped
-    tty: true
+    # NGINX - Service
+    webserver:
+        image: nginx:alpine
+        container_name: ${APP_NAME}_webserver
+        restart: unless-stopped
+        tty: true
 
-    ports:
-      - "8100:80"
-      - "8443:443"
+        ports:
+            - "8100:80"
+            - "8443:443"
 
-    volumes:
-      - ./:/var/www
-      - ./docker-files/nginx/:/etc/nginx/conf.d/
+        volumes:
+            - ./:/var/www
+            - ./docker-files/nginx/:/etc/nginx/conf.d/
 
-    networks:
-      - app-network
+        networks:
+            - app-network
 
-  # MariaDB - Service
-  db:
-    image: mariadb:10.5.6
-    container_name: ${APP_NAME}_db
-    restart: unless-stopped
-    tty: true
+    # MariaDB - Service
+    db:
+        image: mariadb:10.5.6
+        container_name: ${APP_NAME}_db
+        restart: unless-stopped
+        tty: true
 
-    ports:
-      - "3306:3306"
+        ports:
+            - "3306:3306"
 
-    environment:
-      MYSQL_DATABASE: ${DB_DATABASE:?error} # must set or error
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?error} # must set or error
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE:?error} # must set or error
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:?error} # must set or error
 
-    volumes:
-      - mariadbdata:/var/lib/mysql
-      - ./docker-files/mysql/my.cnf:/etc/mysql/my.cnf
+        volumes:
+            - mariadbdata:/var/lib/mysql
+            # - ./data/mysql:/var/lib/mysql # development
+            - ./docker-files/mysql/my.cnf:/etc/mysql/my.cnf
 
-    networks:
-      - app-network
+        networks:
+            - app-network
+
+    # Db Manager - Service
+    adminer:
+        image: adminer:4.8.1
+        container_name: ${APP_NAME}_adminer
+        restart: unless-stopped
+        ports:
+            - 8002:8080 # 5432
+        environment:
+            PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+            PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
 
 # Volumes
 volumes:
-  mariadbdata:
-    driver: local
+    mariadbdata:
+        driver: local
 
 # Networks
 networks:
-  app-network:
-    driver: bridge
-
+    app-network:
+        driver: bridge
