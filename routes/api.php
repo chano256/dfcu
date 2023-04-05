@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\AccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(
+    ['prefix' => 'accounts'],
+    function () {
+        Route::get('/{number}', [AccountController::class, 'show'])
+            ->where('number', '^\d{10}$') // only accepts 10 digits
+            ->name('accounts.show');
+    }
+);
