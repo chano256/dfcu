@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(
-    ['prefix' => 'accounts'],
+Route::group( // incase of additional route groups
+    ['prefix' => 'customer'],
     function () {
-        Route::get('/{number}', [AccountController::class, 'show'])
-            // ->where('number', '^\d{10}$') // only accepts 10 digits
-            ->name('accounts.show');
+        Route::get('/account/{number}/loans', [CustomerController::class, 'show'])->name('customer.account.show.loans');
     }
 );
