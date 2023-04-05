@@ -13,7 +13,6 @@ class CreateConstriantToCheckAccountNumber extends Migration
     public function up()
     {
         DB::statement("ALTER TABLE customers ADD CONSTRAINT chk_customer_no_length CHECK(LENGTH(number) = 10);");
-        DB::statement("ALTER TABLE accounts ADD CONSTRAINT chk_account_no_length CHECK(LENGTH(number) = 10);");
     }
 
     /**
@@ -24,6 +23,5 @@ class CreateConstriantToCheckAccountNumber extends Migration
     public function down()
     {
         DB::statement("ALTER TABLE accounts DROP CONSTRAINT chk_account_no_length;");
-        DB::statement("ALTER TABLE customers DROP CONSTRAINT chk_customer_no_length;");
     }
 }
