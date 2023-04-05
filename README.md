@@ -11,7 +11,7 @@ DFCU bank API for online banking platform to provide information about customer'
 -   php artisan key:generate
 -   php artisan db:seed
 -   php artisan migrate
--   php artisan passport:install
+-   php artisan passport:install --uuids
 
 ##
 
