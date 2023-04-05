@@ -7,7 +7,7 @@ services:
       context: .
       dockerfile: Dockerfile
 
-    container_name: backend
+    container_name: ${APP_NAME}_backend
     restart: unless-stopped
     tty: true
     working_dir: /var/www
@@ -19,10 +19,13 @@ services:
     networks:
       - app-network
 
+    # execute seamless commands for project to start
+    # command: composer install && php artisan key:generate && php artisan db:seed && php artisan migrate
+
   # NGINX - Service
   webserver:
     image: nginx:alpine
-    container_name: webserver
+    container_name: ${APP_NAME}_webserver
     restart: unless-stopped
     tty: true
 
@@ -40,7 +43,7 @@ services:
   # MariaDB - Service
   db:
     image: mariadb:10.5.6
-    container_name: db
+    container_name: ${APP_NAME}_db
     restart: unless-stopped
     tty: true
 
