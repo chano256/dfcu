@@ -15,9 +15,6 @@ services:
             - ./docker-files/php/local.ini:/usr/local/etc/php/conf.d/local.ini
         networks:
             - app-network
-        # execute seamless commands for project to start
-        # cp .env.example file to .env before generating APP_KEY
-        # command: composer install && php artisan key:generate && php artisan db:seed && php artisan migrate
 
     # NGINX - Service
     webserver:
