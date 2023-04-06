@@ -9,6 +9,8 @@ class Loan extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     /**
      * Get Customer for loan
      */
