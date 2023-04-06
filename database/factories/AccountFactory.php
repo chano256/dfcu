@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Faker\Factory as Faker;
 
 class AccountFactory extends Factory
 {
@@ -13,8 +15,12 @@ class AccountFactory extends Factory
      */
     public function definition()
     {
+        $faker = Faker::create();
+
         return [
-            //
+            'number' => $faker->number,
+            'status' => $faker->boolean,
+            'customer_id' => Customer::factory()->create(),
         ];
     }
 }
