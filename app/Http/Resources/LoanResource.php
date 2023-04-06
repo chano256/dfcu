@@ -18,15 +18,12 @@ class LoanResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'number' => $this->number,
             'date' => $this->date,
+            'disbursed_amount' => $this->amount,
             'outstanding_amount' => $this->outstanding_amount,
             'status' => $this->status,
             'customer_name' => $customer->fullname,
-            'customer_number' => $customer->number,
-            'phone' => $customer->phone,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at
+            'phone' => $customer->phone
         ];
     }
 }
