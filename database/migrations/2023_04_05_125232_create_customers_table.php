@@ -19,13 +19,10 @@ class CreateCustomersTable extends Migration
             $table->string('first_name', 30);
             $table->string('last_name', 30);
             $table->string("fullname", 60)->virtualAs("(concat(first_name,' ',last_name))");
-            $table->integer('number', 10)->unique();
             $table->string('phone', 20)->unique();
             $table->boolean('status')->default(0);
             $table->timestamps();
         });
-
-        DB::statement("ALTER TABLE customers ADD CONSTRAINT chk_customer_no_length CHECK(LENGTH(number) = 10);");
     }
 
     /**
