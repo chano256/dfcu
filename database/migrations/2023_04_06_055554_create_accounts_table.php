@@ -21,7 +21,7 @@ class CreateAccountsTable extends Migration
             $table->unsignedBigInteger('customer_id');
             $table->timestamps();
 
-            $table->foreign('customer_id', 'fk_customer_id')->references('id')->on('customers');
+            $table->foreign('customer_id', 'fk_account_customer_id')->references('id')->on('customers');
         });
 
         DB::statement("ALTER TABLE accounts ADD CONSTRAINT chk_account_no_length CHECK(LENGTH(number) = 10);");
