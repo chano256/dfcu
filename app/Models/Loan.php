@@ -18,4 +18,12 @@ class Loan extends Model
     {
         return $this->belongsTo(Customer::class);
     }
+
+    /**
+     * Get account Number
+     */
+    public function getAccountNumberAttribute()
+    {
+        return $this->customer->account->first()->number;
+    }
 }
