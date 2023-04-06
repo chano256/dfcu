@@ -17,6 +17,7 @@ class CustomerController extends Controller
         $account = Account::whereNumber($number)->first();
         abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, 'Account does not exist.');
 
+        // Get outstanding(current) loans
         $loans = $account->customer->loans;
         abort_unless($loans, Response::HTTP_UNPROCESSABLE_ENTITY, 'No loans found.');
 
