@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LoanResource;
-use App\Models\Customer;
+use App\Models\Account;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Response;
 
@@ -14,9 +14,10 @@ class CustomerController extends Controller
      */
     public function showLoans(string $number): JsonResource
     {
-        $customer = Customer::whereNumber($number)->first();
-        abort_unless($customer, Response::HTTP_UNPROCESSABLE_ENTITY, "Action Failed, Account Does Not Exist");
-        $loans = $customer->loans;
+        $account = Account::whereNumber($number)->first();
+        abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, "Action Failed, Account Does Not Exist");
+        $loans = $account->customer->loans;
+        dd($loans);
 
         return LoanResource::collection($loans);
     }
