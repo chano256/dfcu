@@ -4,7 +4,7 @@
 
 DFCU bank API for online banking platform to provide information about customer's loan status.
 
-# Commands to run to ensure a seamless start to project
+# Usefule project commands to run
 
 -   cp .env.example .env
 -   composer install
@@ -12,8 +12,10 @@ DFCU bank API for online banking platform to provide information about customer'
 -   php artisan db:seed
 -   php artisan migrate
 -   php artisan passport:install --uuids
+-   ./vendor/bin/phpcs --ignore=Database/Migrations
 
 ## API Headers
+
 Content-Type:application/x-www-form-urlencoded
 Accept:application/json
 
