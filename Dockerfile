@@ -1,6 +1,6 @@
 FROM php:8.0.10-fpm
 
-# COPY composer.lock composer.json /var/www/
+COPY composer.lock composer.json /var/www/
 
 WORKDIR /var/www
 
@@ -37,7 +37,7 @@ RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
 # Copy application folder
-# COPY . /var/www
+COPY . /var/www
 
 # Copy existing permissions from folder to docker
 COPY --chown=www:www . /var/www
