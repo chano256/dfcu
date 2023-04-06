@@ -17,7 +17,6 @@ class CustomerController extends Controller
         $account = Account::whereNumber($number)->first();
         abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, "Action Failed, Account Does Not Exist");
         $loans = $account->customer->loans;
-        dd($loans);
 
         return LoanResource::collection($loans);
     }
