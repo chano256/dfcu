@@ -36,12 +36,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN groupadd -g 1000 www
 RUN useradd -u 1000 -ms /bin/bash -g www www
 
-# Copy application folder
-COPY . /var/www
-
 # Copy existing permissions from folder to docker
 COPY --chown=www:www . /var/www
 RUN chown -R www-data:www-data /var/www
+
+# Copy application folder
+COPY . /var/www
 
 # change current user to www
 USER www
