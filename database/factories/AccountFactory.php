@@ -16,9 +16,8 @@ class AccountFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
-
         return [
-            'number' => $faker->number,
+            'number' => $faker->numberBetween(10000000000),
             'status' => $faker->boolean,
             'customer_id' => Customer::factory()->create(),
         ];

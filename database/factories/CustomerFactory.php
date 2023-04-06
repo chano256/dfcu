@@ -15,7 +15,6 @@ class CustomerFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
-
         return [
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,

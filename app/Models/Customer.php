@@ -16,4 +16,12 @@ class Customer extends Model
     {
         return $this->hasMany(Loan::class); // customer should not have loan id column
     }
+
+     /**
+     * Get accounts for a customer
+     */
+    public function account()
+    {
+        return $this->hasMany(Account::class);
+    }
 }
