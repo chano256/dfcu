@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::group( // incase of additional route groups
     ['prefix' => 'customer'],
     function () {
-        Route::get('/account/{number}/loans', [CustomerController::class, 'showLoans'])->name('customer.account.loans.show');
+        Route::get('/account/{number}/loans', [CustomerController::class, 'showLoans'])
+            ->middleware('validate.account.number')
+            ->name('customer.account.loans.show');
     }
 );
