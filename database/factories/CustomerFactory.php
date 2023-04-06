@@ -20,6 +20,7 @@ class CustomerFactory extends Factory
             'first_name' => $faker->firstName,
             'last_name' => $faker->lastName,
             'phone' => $faker->phoneNumber,
+            'status' => $faker->boolean
         ];
     }
 
