@@ -19,7 +19,7 @@ class AccountFactory extends Factory
         return [
             'number' => $faker->numberBetween(10000000000),
             'status' => $faker->boolean,
-            'customer_id' => Customer::factory()->create(),
+            'customer_id' => Customer::factory()->create()->id,
         ];
     }
 }

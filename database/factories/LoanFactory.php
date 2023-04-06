@@ -16,11 +16,12 @@ class LoanFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
+
         return [
             'amount' => $faker->numberBetween(50000, 1000000),
             'date' => $faker->date(),
             'status' => $faker->randomElement(['outstanding', 'closed']),
-            'customer_id' => Customer::factory()->hasAccount()->create()
+            'customer_id' => Customer::factory()->hasAccount()->create()->id
         ];
     }
 }
