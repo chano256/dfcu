@@ -18,7 +18,7 @@ services:
 
     # NGINX - Service
     webserver:
-        image: nginx:alpine
+        image: nginx:1.20.1
         container_name: ${APP_NAME}_webserver
         restart: unless-stopped
         tty: true
