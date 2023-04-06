@@ -26,4 +26,13 @@ class Loan extends Model
     {
         return $this->customer->account->first()->number;
     }
+
+    // /**
+    //  * Get outstanding loans
+    //  * Outstanding loans if it loan still has a principal balance
+    //  */
+    // public function scopeOutstanding($query)
+    // {
+    //     return $query->select()->where($);
+    // }
 }
