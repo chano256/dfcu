@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAccountsTable extends Migration
+class CreateLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,17 +13,15 @@ class CreateAccountsTable extends Migration
      */
     public function up()
     {
-        Schema::create('accounts', function (Blueprint $table) {
+        Schema::create('loans', function (Blueprint $table) {
             $table->id();
-            $table->string('number', 10)->unique();
-            $table->boolean('status')->default(0);
+            $table->decimal('amount', 12, 2, true);
+            $table->date('date');
+            $table->enum('status', ['outstanding', 'closed'])->default('outstanding');
             $table->unsignedBigInteger('customer_id');
-            $table->timestamps();
 
             $table->foreign('customer_id', 'fk_customer_id')->references('id')->on('customers');
         });
-
-        DB::statement("ALTER TABLE accounts ADD CONSTRAINT chk_account_no_length CHECK(LENGTH(number) = 10);");
     }
 
     /**
@@ -34,6 +31,6 @@ class CreateAccountsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('accounts');
+        Schema::dropIfExists('loans');
     }
 }
