@@ -15,10 +15,10 @@ class CustomerController extends Controller
     public function showLoans(string $number): JsonResource
     {
         $account = Account::whereNumber($number)->first();
-        abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, 'Account does not exists.');
+        abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, 'Account does not exist.');
 
         $loans = $account->customer->loans;
-        abort_unless($loans, Response::HTTP_UNPROCESSABLE_ENTITY, 'Customer does not have loans.');
+        abort_unless($loans, Response::HTTP_UNPROCESSABLE_ENTITY, 'No loans found.');
 
         return LoanResource::collection($loans);
     }
