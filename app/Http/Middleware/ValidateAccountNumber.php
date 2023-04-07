@@ -21,7 +21,7 @@ class ValidateAccountNumber
     {
         abort_unless(
             preg_match('/\d{10}$/', $request->route('number')),
-            Response::HTTP_UNPROCESSABLE_ENTITY,
+            Response::HTTP_LENGTH_REQUIRED,
             'Number must have exactly 10 digits'
         );
 
