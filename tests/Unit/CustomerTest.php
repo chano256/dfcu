@@ -25,7 +25,7 @@ class CustomerTest extends TestCase
 
         $faker = Faker::create();
 
-        // create an account number not in the db
+        // create an account number with 10 digits not in the db
         do {
             $number = $faker->numberBetween(10000000000);
         } while (Account::whereNumber($number)->first());
@@ -40,7 +40,7 @@ class CustomerTest extends TestCase
      *
      * @return void
      */
-    public function test_fails_for_invalid_account_number_in_url()
+    public function test_invalid_account_number_passed_in_url_throws_exception()
     {
         // login
         // $this->login();
