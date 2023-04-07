@@ -62,6 +62,19 @@ services:
         networks:
             - app-network
 
+    # Python Simulator - Service
+    simulator:
+        build:
+            context: .
+            dockerfile: simulator/Dockerfile
+        container_name: ${APP_NAME}_simulator
+        tty: true
+        working_dir: /app
+        volumes:
+            - ./simulator:/app
+        networks:
+            - app-network
+
 # Volumes
 volumes:
     mariadbdata:
