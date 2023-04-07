@@ -14,11 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group( // incase of additional route groups
-    ['prefix' => 'customer'],
-    function () {
-        Route::get('/account/{number}/loans', [CustomerController::class, 'showLoans'])
-            ->middleware('validate.account.number')
-            ->name('customer.account.loans.show');
-    }
-);
+Route::middleware('request.logger')->group(function () {
+    Route::get('customer/account/{number}/loans', [CustomerController::class, 'showLoans'])
+        ->middleware('validate.account.number')
+        ->name('customer.account.loans.show');
+});
