@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Account;
 use App\Models\Loan;
+use App\Traits\SqlTrait;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -11,7 +12,7 @@ use Faker\Factory as Faker;
 
 class CustomerTest extends TestCase
 {
-    use DatabaseTransactions; // reverts all changes added to the db
+    use DatabaseTransactions, SqlTrait; // reverts all changes added to the db
 
     /**
      * A basic feature test example.
@@ -73,11 +74,29 @@ class CustomerTest extends TestCase
     }
 
     /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_outstanding_sql()
+    {
+        $faker = Faker::create();
+        $alias = $faker->boolean;
+
+        $sql = "(loans.amount - abs((select IFNULL(sum(debit_credit_amount), 0) from loan_ledger as l where l.loan_id = loans.id)))";
+        $sql .= $alias ? " as outstanding_amount" : "  > 0";
+
+        $this->assertSame($sql, $this->outstandingSql($alias));
+    }
+
+    /**
      * Gets structure of the loan resource with a minimum of 4 fields
      *
      */
     private function getLoanStructure(): array
     {
-        return ["data" => [0 => ["id",  "number",  "date",  "disbursed_amount",  "outstanding_amount",  "status",  "customer_name",  "phone"]]];
+        return ["data" => [0 => [
+            "id",  "loan_number",  "disbursement_date",  "disbursed_amount",  "outstanding_amount",  "status",  "customer_name",  "phone"
+        ]]];
     }
 }
