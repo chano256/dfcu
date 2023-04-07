@@ -3,24 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\LoanResource;
-use App\Models\Account;
+use App\Services\CustomerService;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Response;
 
 class CustomerController extends Controller
 {
+    protected $customer;
+
+    public function __construct(CustomerService $customer) {
+        $this->customer = $customer;
+    }
     /**
      * Shows loans for attached to a customers account
      */
     public function showLoans(string $number): JsonResource
     {
-        $account = Account::whereNumber($number)->first();
-        abort_unless($account, Response::HTTP_UNPROCESSABLE_ENTITY, 'Account does not exist.');
-
-        // Get outstanding(current) loans
-        $loans = $account->customer->loans;
-        abort_unless($loans, Response::HTTP_UNPROCESSABLE_ENTITY, 'No loans found.');
-
+        $loans = $this->customer->getOutstandingLoans($number);
         return LoanResource::collection($loans);
     }
 }
