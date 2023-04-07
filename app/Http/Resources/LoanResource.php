@@ -22,7 +22,6 @@ class LoanResource extends JsonResource
             'disbursement_date' => $this->date,
             'disbursed_amount' => $this->amount,
             'outstanding_amount' => $this->outstanding_amount,
-            'status' => $this->status,
             'customer_name' => $customer->fullname,
             'phone' => $customer->phone
         ];

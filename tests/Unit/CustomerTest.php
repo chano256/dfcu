@@ -96,7 +96,7 @@ class CustomerTest extends TestCase
     private function getLoanStructure(): array
     {
         return ["data" => [0 => [
-            "id",  "loan_number",  "disbursement_date",  "disbursed_amount",  "outstanding_amount",  "status",  "customer_name",  "phone"
+            "id",  "loan_number",  "disbursement_date",  "disbursed_amount",  "outstanding_amount",  "customer_name",  "phone"
         ]]];
     }
 }

@@ -26,7 +26,6 @@ class LoanFactory extends Factory
             'amount' => $faker->numberBetween(50000, 1000000),
             'number' => strtoupper($number),
             'date' => $faker->date(),
-            'status' => $faker->randomElement(['outstanding']),
             'customer_id' => Customer::factory()->hasAccount()->create()->id
         ];
     }
