@@ -20,7 +20,7 @@ class ValidateAccountNumber
     public function handle(Request $request, Closure $next)
     {
         abort_unless(
-            preg_match('/\d{10}$/', $request->route('number')),
+            preg_match('/^\d{10}$/', $request->route('number')),
             Response::HTTP_LENGTH_REQUIRED,
             'Number must have exactly 10 digits'
         );
