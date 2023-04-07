@@ -10,4 +10,5 @@ class LoanLedger extends Model
     use HasFactory;
 
     protected $table = 'loan_ledger';
+    public $timestamps = false;
 }
