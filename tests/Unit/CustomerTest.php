@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Account;
+use App\Models\Loan;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -51,5 +52,32 @@ class CustomerTest extends TestCase
 
         $response = $this->getJson(route('customer.account.loans.show', ['number' => $number]));
         $response->assertStatus(411);
+    }
+
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_can_get_outstanding_loans_for_requested_account_number()
+    {
+        // login
+        // $this->login();
+
+        $account = Account::factory()->create();
+        Loan::factory(2)->create(['customer_id' => $account->customer_id]);
+
+        $response = $this->getJson(route('customer.account.loans.show', ['number' => $account->number]));
+        $response->assertStatus(200);
+        $response->assertJsonStructure($this->getLoanStructure());
+    }
+
+    /**
+     * Gets structure of the loan resource with a minimum of 4 fields
+     *
+     */
+    private function getLoanStructure(): array
+    {
+        return ["data" => [0 => ["id",  "number",  "date",  "disbursed_amount",  "outstanding_amount",  "status",  "customer_name",  "phone"]]];
     }
 }
