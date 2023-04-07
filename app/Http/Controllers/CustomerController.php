@@ -10,7 +10,8 @@ class CustomerController extends Controller
 {
     protected $customer;
 
-    public function __construct(CustomerService $customer) {
+    public function __construct(CustomerService $customer)
+    {
         $this->customer = $customer;
     }
     /**
