@@ -13,7 +13,7 @@ DFCU bank API for online banking platform to provide information about customer'
 -   php artisan migrate
 -   php artisan passport:install --uuids
 -   ./vendor/bin/phpcs --ignore=Database/Migrations
--   php artisan passport:keys
+-   php artisan passport:keys (!!! Save them in .env file once created cause can never be recovered since hashed)
 
 ## API Headers
 
