@@ -40,7 +40,8 @@ def store_account_details(account_numbers: list) -> None:
     with open(filename, 'w') as file:
         file.write(results)
 
-    print(f"Storing results to file: {filename} completed successfully")
+    print(
+        f"Storing results completed successfully. Check Simulator folder for {filename} file")
 
 
 def validate_user_input(account_numbers) -> list:
