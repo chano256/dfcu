@@ -1,6 +1,7 @@
 import requests
 import json
 import sys
+import os
 
 
 def store_account_details(account_numbers: list) -> None:
@@ -12,25 +13,34 @@ def store_account_details(account_numbers: list) -> None:
     headers = {'Accept': 'application/json',
                'Content-Type': 'application/x-www-form-urlencoded'}
 
-    # Make API calls for each account number and store the results in a text file
-    with open('results.txt', 'w') as file:
-        for number in account_numbers:
-            # change host name based on your docker server service e.g LARAVEL_APP_NAME_webserver
-            response = requests.get(
-                f"http://dfcu_webserver:80/api/customer/account/{number}/loans", headers=headers)
+    results = ''
+    for number in account_numbers:
+        # Call the API for each account number and write the results to a file
+        # change host name based on your docker server service e.g LARAVEL_APP_NAME_webserver
+        response = requests.get(
+            f"http://dfcu_webserver:80/api/customer/account/{number}/loans", headers=headers)
 
-            data = response.json()
-            code = response.status_code
+        data = response.json()
+        code = response.status_code
 
-            if code == 200:
-                formatted = json.dumps(data['data'][0], indent=4)
-                file.write(f"{number}: {formatted}\n\n")
-            elif code >= 400 and code < 500:
-                file.write(f"{number}: {data['message']}\n\n")
+        # Save the results to a file based on status codes since numbers with errors could be very long
+        if code == 200:
+            details = data['data'][0] if len(
+                data['data']) != 0 else data['data']
+            formatted = json.dumps(details, indent=4)
+            results += f"{number}: {formatted}\n\n"
+        elif code >= 400 and code < 500:
+            results += f"{number}: {data['message']}\n\n"
 
-            # other responses not specified above just return the response
-            else:
-                file.write(f'{data}\n\n')
+        # other responses not specified above just return the response
+        else:
+            results += f"{data}\n\n"
+
+    filename = 'results.txt'
+    with open(filename, 'w') as file:
+        file.write(results)
+
+    print(f"Storing results to file: {filename} completed successfully")
 
 
 def validate_user_input(account_numbers) -> list:
