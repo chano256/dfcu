@@ -56,6 +56,8 @@ def validate_user_input(account_numbers) -> list:
         else:
             print(f"Invalid account number: {num}")
 
+    # shows users enetered account numbers to store
+    print(f"Account numbers: {', '.join(numbers)}")
     return numbers
 
 
@@ -64,6 +66,4 @@ presumed_accounts = input(
     "Enter presumed account numbers separated by a space: ")
 
 account_numbers = validate_user_input(presumed_accounts.split())
-# shows users enetered account numbers to store
-print(f"Account numbers: {', '.join(account_numbers)}")
 store_account_details(account_numbers)
