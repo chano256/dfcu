@@ -11,6 +11,9 @@ class CustomerController extends Controller
 {
     protected $customer;
 
+    /**
+     * Gets customer service methods from CustomerService
+     */
     public function __construct(CustomerService $customer)
     {
         $this->customer = $customer;
@@ -26,7 +29,7 @@ class CustomerController extends Controller
     }
 
     /**
-     * Endpoint that provides a view of the APIs performance 
+     * Endpoint that provides a view of the APIs performance
      * i.e. number of requests, number of failed validations,
      * number of positive requests (at least one loan) and number of negative requests (zero outstanding loans).
      */

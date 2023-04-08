@@ -3,8 +3,10 @@
 namespace App\Models;
 
 use App\Traits\SqlTrait;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Loan extends Model
 {
@@ -15,7 +17,7 @@ class Loan extends Model
     /**
      * Get Customer for loan
      */
-    public function customer()
+    public function customer(): BelongsTo
     {
         return $this->belongsTo(Customer::class);
     }
@@ -24,7 +26,7 @@ class Loan extends Model
      * Get outstanding loans
      * Outstanding loans if it loan still has a principal balance
      */
-    public function scopeOutstanding($query)
+    public function scopeOutstanding(Builder $query): Builder
     {
         return $query->select('loans.*')->selectRaw($this->outstandingSql(true))->whereRaw($this->outstandingSql());
     }
