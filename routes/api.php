@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('request.logger')->group(function () {
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
     Route::get('customer/account/{number}/loans', [CustomerController::class, 'showLoans'])
-        ->middleware('validate.account.number')
+        ->middleware(['validate.account.number', 'request.logger'])
         ->name('customer.account.loans.show');
 });
