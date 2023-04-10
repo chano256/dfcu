@@ -1,0 +1,53 @@
+name: Laravel
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  laravel-tests:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup PHP
+      uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '7.3'
+        
+    - name: Checkout code
+      uses: actions/checkout@v3
+    
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    
+    - name: Set environment variable
+      run: echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
+    
+    - name: Set database variable
+      run: echo "DB_CONNECTION=sqlite" >> $GITHUB_ENV
+      
+    - name: Install Dependencies
+      run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+#     - name: Linting
+#       run: ./vendor/bin/phpcs --ignore=Database/Migrations --ignore=Resources/Views
+      
+    - name: Generate key
+      run: php artisan key:generate
+    
+    - name: Create Database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+    
+#     - name: Migrate database
+#       run: php artisan migrate --force
+      
+#     - name: Execute tests (Unit and Feature tests) via PHPUnit
+#       env:
+#         DB_CONNECTION: sqlite
+#         DB_DATABASE: database/database.sqlite
+#       run: vendor/bin/phpunit
