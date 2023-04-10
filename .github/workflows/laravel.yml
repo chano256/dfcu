@@ -35,7 +35,7 @@ jobs:
         touch database/database.sqlite
     
     - name: Generate key
-      run: php artisan migrate
+      run: php artisan migrate --force
       
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       env:
