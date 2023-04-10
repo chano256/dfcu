@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Loan;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -19,6 +20,8 @@ class DatabaseSeeder extends Seeder
         // therefore this API is to query the customer loan status
 
         User::factory()->create();
-        Loan::factory(10)->create(); // create multiple loans
+
+        $loans = Loan::factory(10)->create(); // create multiple loans
+        Log::info($loans->toArray()); // check logs to pick a loan number to confirm
     }
 }
