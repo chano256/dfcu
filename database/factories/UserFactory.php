@@ -16,8 +16,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $name = 'dfcu_api';
-        $email = 'dfcu@test.com';
+        $name = $this->faker->name();
+        $email = $this->faker->unique()->safeEmail();
 
         Log::info("Creating user {$name} with email {$email}");
         return [
