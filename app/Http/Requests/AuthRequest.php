@@ -26,9 +26,9 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         $route_name = Route::current()->getName();
-        if ($route_name == 'register') {
-            return $this->register();
-        }
+        // if ($route_name == 'register') {
+        //     return $this->register();
+        // }
 
         if ($route_name == 'login') {
             return $this->login();
@@ -49,18 +49,18 @@ class AuthRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    protected function register()
-    {
-        $password = Password::min(8)->mixedCase()->numbers()->symbols();
-        return [
-            'name' => 'required|string|max:100',
-            'email' => 'email|required|string|unique:users',
-            'password' => ['required', 'confirmed', $password],
-        ];
-    }
+    // /**
+    //  * Get the validation rules that apply to the request.
+    //  *
+    //  * @return array
+    //  */
+    // protected function register()
+    // {
+    //     $password = Password::min(8)->mixedCase()->numbers()->symbols();
+    //     return [
+    //         'name' => 'required|string|max:100',
+    //         'email' => 'email|required|string|unique:users',
+    //         'password' => ['required', 'confirmed', $password],
+    //     ];
+    // }
 }
