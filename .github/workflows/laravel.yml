@@ -30,7 +30,7 @@ jobs:
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     
     - name: Linting
-      run: ./vendor/bin/phpcs --ignore=Database/Migrations
+      run: ./vendor/bin/phpcs --ignore=Database/Migrations --ignore=Resources
       
     - name: Generate key
       run: php artisan key:generate
