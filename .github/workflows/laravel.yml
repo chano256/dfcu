@@ -25,6 +25,9 @@ jobs:
     
     - name: Set environment variable
       run: echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
+    
+    - name: Set database variable
+      run: echo "DB_CONNECTION=sqlite" >> $GITHUB_ENV
       
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
