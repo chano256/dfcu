@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Loan;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,8 +17,8 @@ class DatabaseSeeder extends Seeder
     {
         // we assume the other endpoints at the bank created the customers
         // therefore this API is to query the customer loan status
-        
-        // \App\Models\User::factory(10)->create();
+
+        User::factory()->create();
         Loan::factory(10)->create(); // create multiple loans
     }
 }
