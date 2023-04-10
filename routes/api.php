@@ -24,4 +24,6 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('customer/account/{number}/loans', [CustomerController::class, 'showLoans'])
         ->middleware(['validate.account.number', 'request.logger'])
         ->name('customer.account.loans.show');
+
+    Route::get('/performance', [CustomerController::class, 'getApiPerformance'])->name('performance');
 });
