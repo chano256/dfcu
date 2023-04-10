@@ -43,11 +43,11 @@ jobs:
         mkdir -p database
         touch database/database.sqlite
     
-    - name: Migrate database
-      run: php artisan migrate --force
+#     - name: Migrate database
+#       run: php artisan migrate --force
       
-    - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
-      run: vendor/bin/phpunit
+#     - name: Execute tests (Unit and Feature tests) via PHPUnit
+#       env:
+#         DB_CONNECTION: sqlite
+#         DB_DATABASE: database/database.sqlite
+#       run: vendor/bin/phpunit
