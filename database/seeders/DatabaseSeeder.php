@@ -21,7 +21,6 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create();
 
-        $loans = Loan::factory(10)->create(); // create multiple loans
-        Log::info($loans->toArray()); // check logs to pick a loan number to confirm
+        Loan::factory(10)->create(); // create multiple loans
     }
 }

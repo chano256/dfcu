@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class UserFactory extends Factory
@@ -15,9 +16,13 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $name = 'dfcu_api';
+        $email = 'dfcu@test.com';
+
+        Log::info("Creating user {$name} with email {$email}");
         return [
-            'name' => 'dfcu_api',
-            'email' => 'dfcu@test.com',
+            'name' => $name,
+            'email' => $email,
             'email_verified_at' => now(),
             'password' => Hash::make('my@Test24#'), // password to be hashed
             'remember_token' => Str::random(10),

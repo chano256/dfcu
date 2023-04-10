@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\Customer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Log;
 
 class AccountFactory extends Factory
 {
@@ -16,10 +17,14 @@ class AccountFactory extends Factory
     public function definition()
     {
         $faker = Faker::create();
+        $customer = Customer::factory()->create();
+        $number = $faker->numberBetween(10000000000);
+
+        Log::info("Creating account {$number} for customer {$customer->fullname}");
         return [
-            'number' => $faker->numberBetween(10000000000),
+            'number' => $number,
             'status' => $faker->boolean,
-            'customer_id' => Customer::factory()->create()->id,
+            'customer_id' => $customer->id,
         ];
     }
 }

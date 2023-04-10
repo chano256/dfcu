@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Loan;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Log;
 
 class LoanFactory extends Factory
 {
@@ -22,11 +23,16 @@ class LoanFactory extends Factory
             $number = $faker->regexify('[0-9A-Za-z]{10}');
         } while (Loan::whereNumber($number)->first());
 
+        $loan_number = strtoupper($number);
+        $date = $faker->date();
+        $customer = Customer::factory()->hasAccount()->create();
+
+        Log::info("Creating Loan {$loan_number} for customer {$customer->fullname}");
         return [
             'amount' => $faker->numberBetween(50000, 1000000),
-            'number' => strtoupper($number),
-            'date' => $faker->date(),
-            'customer_id' => Customer::factory()->hasAccount()->create()->id
+            'number' => $loan_number,
+            'date' => $date,
+            'customer_id' => $customer->id
         ];
     }
 }
