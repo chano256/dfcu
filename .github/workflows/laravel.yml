@@ -26,12 +26,12 @@ jobs:
     - name: Set environment variable
       run: echo "DB_HOST=127.0.0.1" >> $GITHUB_ENV
       
-    - name: Linting
-      run: ./vendor/bin/phpcs --ignore=Database/Migrations
-      
     - name: Install Dependencies
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     
+    - name: Linting
+      run: ./vendor/bin/phpcs --ignore=Database/Migrations
+      
     - name: Generate key
       run: php artisan key:generate
     
