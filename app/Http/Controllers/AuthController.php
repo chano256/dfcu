@@ -48,23 +48,23 @@ class AuthController extends Controller
         return response(["message" => "{$user->name} has successfully logged out"]);
     }
 
-    // /**
-    //  * Registers a user
-    //  */
-    // public function register(AuthRequest $request)
-    // {
-    //     $credentials = $request->validated();
+    /**
+     * Registers a user
+     */
+    public function register(AuthRequest $request)
+    {
+        $credentials = $request->validated();
 
-    //     DB::beginTransaction();
-    //     $credentials['password'] = Hash::make($request->password);
-    //     $user = User::create($credentials);
-    //     $access_token = $user->createToken('authToken')->accessToken;
-    //     DB::commit();
+        DB::beginTransaction();
+        $credentials['password'] = Hash::make($request->password);
+        $user = User::create($credentials);
+        $access_token = $user->createToken('authToken')->accessToken;
+        DB::commit();
 
-    //     return response([
-    //         'user' => $user->name,
-    //         'token_type' => 'Bearer',
-    //         'access_token' => $access_token
-    //     ], 201);
-    // }
+        return response([
+            'user' => $user->name,
+            'token_type' => 'Bearer',
+            'access_token' => $access_token
+        ], 201);
+    }
 }

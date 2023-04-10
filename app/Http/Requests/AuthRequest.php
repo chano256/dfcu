@@ -26,9 +26,9 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         $route_name = Route::current()->getName();
-        // if ($route_name == 'register') {
-        //     return $this->register();
-        // }
+        if ($route_name == 'register') {
+            return $this->register();
+        }
 
         if ($route_name == 'login') {
             return $this->login();
