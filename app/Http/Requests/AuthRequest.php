@@ -49,18 +49,18 @@ class AuthRequest extends FormRequest
         ];
     }
 
-    // /**
-    //  * Get the validation rules that apply to the request.
-    //  *
-    //  * @return array
-    //  */
-    // protected function register()
-    // {
-    //     $password = Password::min(8)->mixedCase()->numbers()->symbols();
-    //     return [
-    //         'name' => 'required|string|max:100',
-    //         'email' => 'email|required|string|unique:users',
-    //         'password' => ['required', 'confirmed', $password],
-    //     ];
-    // }
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array
+     */
+    protected function register()
+    {
+        $password = Password::min(8)->mixedCase()->numbers()->symbols();
+        return [
+            'name' => 'required|string|max:100',
+            'email' => 'email|required|string|unique:users',
+            'password' => ['required', 'confirmed', $password],
+        ];
+    }
 }
