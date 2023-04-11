@@ -1,9 +1,10 @@
 import requests
 import json
+from typing import Dict
 import sys
 import os
 
-def create_user():
+def create_user() -> Dict[str, int]:
     '''
     Creates user to get an access token
     '''
@@ -13,7 +14,7 @@ def create_user():
     
     params = {
         'name': 'test_user',
-        'email': 'test6@user.com',
+        'email': 'test8@user.com',
         'password': 'my@Test24#',
         'password_confirmation': 'my@Test24#'
     }
@@ -21,9 +22,14 @@ def create_user():
     response = requests.post(
                 f"http://dfcu_webserver:80/api/register", headers=headers, params=params)
     
-    response = response.json()
-    print(f"Access token created for user {response.get('user')}")
-    return response
+    data = response.json()
+
+    if data.get('user') is None:
+        print(data)
+        sys.exit() # ends execution if no user was created
+    
+    print(f"Access token created for user {data.get('user')}")
+    return data
 
 
 def store_account_details(account_numbers: list, token: str) -> None:
