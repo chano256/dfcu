@@ -50,7 +50,7 @@ class AuthController extends Controller
 
     /**
      * Registers a user
-     * 
+     *
      * @param \Illuminate\Foundation\Http\FormRequest $request
      */
     public function register(AuthRequest $request): Response
