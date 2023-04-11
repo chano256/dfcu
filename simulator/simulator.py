@@ -3,15 +3,38 @@ import json
 import sys
 import os
 
+def create_user():
+    '''
+    Creates user to get an access token
+    '''
 
-def store_account_details(account_numbers: list) -> None:
+    headers = {'Accept': 'application/json',
+                'Content-Type': 'application/x-www-form-urlencoded'}
+    
+    params = {
+        'name': 'test_user',
+        'email': 'test6@user.com',
+        'password': 'my@Test24#',
+        'password_confirmation': 'my@Test24#'
+    }
+
+    response = requests.post(
+                f"http://dfcu_webserver:80/api/register", headers=headers, params=params)
+    
+    response = response.json()
+    print(f"Access token created for user {response.get('user')}")
+    return response
+
+
+def store_account_details(account_numbers: list, token: str) -> None:
     '''
     Function that takes in a list of presumed account numbers, 
     calls the customer account loan API and stores the result in a results textfile.
     '''
 
     headers = {'Accept': 'application/json',
-               'Content-Type': 'application/x-www-form-urlencoded'}
+               'Content-Type': 'application/x-www-form-urlencoded', 
+               'Authorization': f'Bearer {token}'}
 
     results = ''
     for number in account_numbers:
@@ -62,8 +85,10 @@ def validate_user_input(account_numbers) -> list:
 
 
 # Generate a list of presumed account numbers (try 10 digit and non 10 digits as well as letters)
+user = create_user()
 presumed_accounts = input(
     "Enter presumed account numbers separated by a space: ")
 
 account_numbers = validate_user_input(presumed_accounts.split())
-store_account_details(account_numbers)
+store_account_details(account_numbers, user.get('access_token'))
+
