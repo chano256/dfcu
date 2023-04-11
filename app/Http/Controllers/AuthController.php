@@ -15,7 +15,7 @@ class AuthController extends Controller
     /**
      * Login a user
      *
-     * @param \Illuminate\Foundation\Http\FormRequest
+     * @param \Illuminate\Foundation\Http\FormRequest $request
      */
     public function login(AuthRequest $request): Response
     {
@@ -38,7 +38,7 @@ class AuthController extends Controller
     /**
      * Login a user
      *
-     * @param \Illuminate\Foundation\Http\FormRequest
+     * @param \Illuminate\Foundation\Http\FormRequest $request
      */
     public function logout(Request $request): Response
     {
@@ -50,8 +50,10 @@ class AuthController extends Controller
 
     /**
      * Registers a user
+     * 
+     * @param \Illuminate\Foundation\Http\FormRequest $request
      */
-    public function register(AuthRequest $request)
+    public function register(AuthRequest $request): Response
     {
         $credentials = $request->validated();
 
