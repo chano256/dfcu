@@ -92,6 +92,20 @@ class CustomerTest extends TestCase
     }
 
     /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    public function test_unauthorized_user_cannot_view_loans_for_customer_account()
+    {
+        $account = Account::factory()->create();
+        Loan::factory(2)->create(['customer_id' => $account->customer_id]);
+
+        $response = $this->getJson(route('customer.account.loans.show', ['number' => $account->number]));
+        $response->assertStatus(401);
+    }
+
+    /**
      * Gets structure of the loan resource with a minimum of 4 fields
      *
      */
