@@ -18,12 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
-    Route::get('customer/account/{number}/loans', [CustomerController::class, 'showLoans'])
-        ->middleware(['validate.account.number', 'request.logger'])
+    Route::middleware('request.logger')->group(function () {
+        Route::get('customer/account/{number}/loans', [CustomerController::class, 'showLoans'])
+        ->middleware('validate.account.number')
         ->name('customer.account.loans.show');
+    });
 
     Route::get('/performance', [CustomerController::class, 'getApiPerformance'])->name('performance');
 });
