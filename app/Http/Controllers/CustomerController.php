@@ -25,7 +25,7 @@ class CustomerController extends Controller
     public function showLoans(string $number): JsonResource
     {
         $loans = $this->customer->getOutstandingLoans($number);
-        return LoanResource::collection($loans);
+    return LoanResource::collection($loans);
     }
 
     /**
@@ -38,6 +38,6 @@ class CustomerController extends Controller
     public function getApiPerformance()
     {
         $audit = AuditTrail::first();
-        return view('admin', $audit->toArray());
+        return response($audit->toArray());
     }
 }
