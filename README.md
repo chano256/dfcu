@@ -1,4 +1,4 @@
-<p align="center"><a href="https://www.dfcugroup.com/" target="_blank"><img src="https://e8thxnwsqmj.exactdn.com/wp-content/themes/dfcu-bank/images/dfcu_bank_logo.png?strip=all&lossy=1&ssl=1" width="400"></a></p>
+<p align="center"><a href="https://www.dfcugroup.com/" target="_blank"><img src="https://www.dfcugroup.com/wp-content/themes/dfcu-bank/images/dfcu_bank_logo.png.webp" width="400"></a></p>
 
 ## About DFCU Customer Loans Statuses
 
