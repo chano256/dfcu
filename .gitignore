@@ -4,7 +4,7 @@
 /storage/*.key
 /vendor
 .env
-.env.backup
+*.cache
 .phpunit.result.cache
 docker-compose.override.yml
 Homestead.json
@@ -14,3 +14,4 @@ yarn-error.log
 /.idea
 /.vscode
 results.txt
+.DS_Store
